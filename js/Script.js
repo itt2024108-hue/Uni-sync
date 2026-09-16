@@ -96,3 +96,33 @@ function initEngineDemo() {
     resetBtn.style.display = 'none';
   });
 }
+// ---------- Add Course Form Logic (input.html) ----------
+document.addEventListener('DOMContentLoaded', function () {
+  var courseForm = document.getElementById('courseForm');
+  var formSuccess = document.getElementById('formSuccess');
+
+  if (courseForm) {
+    courseForm.addEventListener('submit', function (e) {
+      e.preventDefault(); // Stop the page from reloading
+      
+      // Get the typed data
+      var name = document.getElementById('courseName').value;
+      var load = document.getElementById('courseLoad').value;
+      var date = document.getElementById('examDate').value;
+      
+      // Save it to the browser's Local Storage
+      var existingCourses = JSON.parse(localStorage.getItem('uniSyncCourses')) || [];
+      existingCourses.push({ name: name, load: load, date: date });
+      localStorage.setItem('uniSyncCourses', JSON.stringify(existingCourses));
+      
+      // Show success message and clear the form
+      formSuccess.classList.remove('d-none');
+      courseForm.reset();
+      
+      // Hide the success message after 3 seconds
+      setTimeout(function() {
+        formSuccess.classList.add('d-none');
+      }, 3000);
+    });
+  }
+});
