@@ -1,34 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Uni-Sync</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uni-Sync — Academic Command Center</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-light">
+<body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark theme-green">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">Uni-Sync</a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link active fw-bold text-white" href="index.html">Dashboard</a>
-                <a class="nav-link text-white" href="input.html">Data Entry</a>
-                <a class="nav-link text-white" href="planner.html">Adaptive Planner</a>
-            </div>
-        </div>
-    </nav>
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="shell">
+    <a href="index.html" class="brand"><span class="pulse"></span> Uni-Sync</a>
+    <div class="nav-links">
+      <a href="index.html" class="current">Home</a>
+      <a href="planner.html">Study planner</a>
+      <a href="dashboard.html">Dashboard</a>
+    </div>
+    <div class="nav-cta">
+      <a href="dashboard.html" class="btn-ghost btn d-none d-sm-inline-flex">See the dashboard</a>
+      <a href="planner.html" class="btn-signal btn">Get started</a>
+      <button class="nav-toggle" id="navToggle"><i class="bi bi-list"></i></button>
+    </div>
+  </div>
+</div>
 
-    <!-- Dashboard Content -->
-    <div class="container mt-5">
-        <h2 class="mb-4">Visual Countdown Systems</h2>
-        <div class="row" id="countdown-container">
-            <!-- JavaScript will inject the countdown cards here -->
+<div id="mobileMenu" class="shell d-none" style="padding-top:1rem; padding-bottom:1rem; border-bottom:1px solid var(--line-soft);">
+  <a href="index.html" class="current">Home</a>
+  <a href="planner.html">Study planner</a>
+  <a href="dashboard.html">Dashboard</a>
+</div>
+
+<!-- HERO -->
+<section class="hero grid-bg">
+  <div class="shell">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="kicker">Built for exam season, not just calendars</div>
+        <h1>Your syllabus, turned into a plan that survives a bad week.</h1>
+        <p class="lead mt-3 mb-4">Uni-Sync tracks every exam and deadline, breaks each syllabus into daily study blocks, and rebuilds the plan the moment you fall behind — no manual rescheduling, no guilt spiral.</p>
+        <div class="d-flex gap-3">
+          <a href="planner.html" class="btn-signal btn">Get started</a>
+          <a href="dashboard.html" class="btn-ghost btn">See the dashboard</a>
         </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="console">
+          <div class="console-head">
+            <span>Live countdown</span>
+            <span class="dots"><span></span><span></span><span></span></span>
+          </div>
+          <div class="console-label">Next up</div>
+          <div class="console-course">Data Structures &amp; Algorithms — Final Exam</div>
+          <div class="countdown mono" id="heroCountdown">
+            <div class="unit"><div class="num" id="hd">00</div><div class="lbl">days</div></div>
+            <div class="unit"><div class="num" id="hh">00</div><div class="lbl">hours</div></div>
+            <div class="unit"><div class="num" id="hm">00</div><div class="lbl">min</div></div>
+            <div class="unit"><div class="num" id="hs">00</div><div class="lbl">sec</div></div>
+          </div>
+          <div class="console-foot">
+            <span>Syllabus coverage: <span class="go">62% on schedule</span></span>
+            <span>Today's block: 45 min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<div class="strip">
+  <div class="shell">
+    <div class="item"><div class="num mono">1 formula</div><div class="cap">drives every recalculation — no black-box AI</div></div>
+    <div class="item"><div class="num mono">Web + mobile</div><div class="cap">one plan, synced across devices</div></div>
+    <div class="item"><div class="num mono">Daily cap</div><div class="cap">rebalancing never overloads a single day</div></div>
+    <div class="item"><div class="num mono">Zero setup</div><div class="cap">add a course, get a plan the same minute</div></div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section>
+  <div class="shell">
+    <div class="kicker">What Uni-Sync actually does</div>
+    <h2 class="mb-0" style="font-size:2.1rem; max-width:640px;">Three systems, one command center.</h2>
+
+    <div class="feature-row">
+      <div class="col">
+        <h3>Centralized exam &amp; deadline input</h3>
+        <p>Add a course once — exam date, assignment due dates, and syllabus topics all live in one place instead of three different apps and a paper diary.</p>
+        <div class="tag-list">
+          <span>Course schedules</span><span>Exam dates</span><span>Assignment deadlines</span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="engine-panel">
+          <div class="mini-item"><span>DSA — Final Exam</span><span class="m-count mono">12d 04h</span></div>
+          <div class="mini-item"><span>Database Systems — Assignment 3</span><span class="m-count mono">03d 11h</span></div>
+          <div class="mini-item"><span>Networks — Lab Report</span><span class="m-count mono">01d 06h</span></div>
+          <div class="mini-item"><span>OOP — Mid-term</span><span class="m-count mono">21d 02h</span></div>
+        </div>
+      </div>
     </div>
 
- <script src="js/script.js"></script>
+    <div class="feature-row reverse">
+      <div class="col">
+        <h3>Adaptive study planner</h3>
+        <p>Each syllabus is split into daily study blocks sized to what's actually left before the exam. Miss a session, and a deterministic formula redraws the rest of the week for you.</p>
+        <a href="planner.html" class="btn-ghost btn mt-2">See the planner in action</a>
+      </div>
+      <div class="col">
+        <div class="engine-panel">
+          <div class="console-label mb-2">This week — Data Structures</div>
+          <div class="bars">
+            <div class="bar-col"><div class="bar" style="height:55%"></div><div class="bar-day">Mon</div><div class="bar-val mono">20u</div></div>
+            <div class="bar-col"><div class="bar" style="height:55%"></div><div class="bar-day">Tue</div><div class="bar-val mono">20u</div></div>
+            <div class="bar-col"><div class="bar" style="height:55%"></div><div class="bar-day">Wed</div><div class="bar-val mono">20u</div></div>
+            <div class="bar-col"><div class="bar" style="height:55%"></div><div class="bar-day">Thu</div><div class="bar-val mono">20u</div></div>
+            <div class="bar-col"><div class="bar" style="height:55%"></div><div class="bar-day">Fri</div><div class="bar-val mono">20u</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-row">
+      <div class="col">
+        <h3>One dashboard for everything</h3>
+        <p>Countdowns, today's study blocks, and syllabus coverage in a single screen — no switching between a calendar app, a to-do list, and a notebook.</p>
+        <a href="dashboard.html" class="btn-ghost btn mt-2">Open the dashboard preview</a>
+      </div>
+      <div class="col">
+        <div class="engine-panel" style="text-align:center;">
+          <div class="progress-ring mx-auto" style="background:conic-gradient(var(--go) 0% 62%, var(--line-soft) 62% 100%);">
+            <div class="ring-inner"><span class="center">62%</span></div>
+          </div>
+          <div class="console-label mt-2">Syllabus coverage this term</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="shell">
+    <div class="cta-block">
+      <div class="kicker" style="justify-content:center;">Skill Development Project I — ICT 1108</div>
+      <h2>Uni-Sync: an academic command center, built by students.</h2>
+      <p>Developed by Group 06, Department of Information and Communication Technology, Faculty of Technology, Rajarata University of Sri Lanka.</p>
+      <a href="planner.html" class="btn-signal btn">Explore the planner</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="shell">
+    <div class="brand"><span class="pulse"></span> Uni-Sync</div>
+    <div class="meta">
+      Group 06 — The Uni Sync<br>
+      Supervisor: Mr. Nandika Tennakoon, ITT Department
+    </div>
+    <div class="meta">&copy; 2026 Uni-Sync. Built for Rajarata University of Sri Lanka.</div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
