@@ -96,7 +96,7 @@ function initEngineDemo() {
     resetBtn.style.display = 'none';
   });
 }
-// ---------- Add Course Form Logic (input.html) ----------
+// ---------- Add Course Form Logic (PHP Backend) ----------
 document.addEventListener('DOMContentLoaded', function () {
   var courseForm = document.getElementById('courseForm');
   var formSuccess = document.getElementById('formSuccess');
@@ -105,24 +105,73 @@ document.addEventListener('DOMContentLoaded', function () {
     courseForm.addEventListener('submit', function (e) {
       e.preventDefault(); // Stop the page from reloading
       
-      // Get the typed data
-      var name = document.getElementById('courseName').value;
-      var load = document.getElementById('courseLoad').value;
-      var date = document.getElementById('examDate').value;
+      // Package the form data
+      var formData = new FormData();
+      formData.append('courseName', document.getElementById('courseName').value);
+      formData.append('courseLoad', document.getElementById('courseLoad').value);
+      formData.append('examDate', document.getElementById('examDate').value);
       
-      // Save it to the browser's Local Storage
-      var existingCourses = JSON.parse(localStorage.getItem('uniSyncCourses')) || [];
-      existingCourses.push({ name: name, load: load, date: date });
-      localStorage.setItem('uniSyncCourses', JSON.stringify(existingCourses));
-      
-      // Show success message and clear the form
-      formSuccess.classList.remove('d-none');
-      courseForm.reset();
-      
-      // Hide the success message after 3 seconds
-      setTimeout(function() {
-        formSuccess.classList.add('d-none');
-      }, 3000);
+      // Send it silently to the PHP file
+      fetch('backend/save_course.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.status === 'success') {
+            // Show success message and clear form
+            formSuccess.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i> Course saved to database!';
+            formSuccess.classList.remove('d-none');
+            courseForm.reset();
+            
+            setTimeout(function() {
+              formSuccess.classList.add('d-none');
+            }, 3000);
+        } else {
+            alert("Error saving course: " + data.message);
+        }
+      })
+      .catch(error => console.error('Error:', error));
     });
+  }
+});
+// ---------- Fetch Courses for Dashboard (PHP Backend) ----------
+console.log("Dashboard script is alive!"); // Add this line
+
+document.addEventListener('DOMContentLoaded', function () {
+  console.log("DOM loaded successfully!"); // Add this line
+  var courseList = document.getElementById('dynamicCourseList');
+  console.log("Course list element found:", courseList); // Add this line
+
+  if (courseList) {
+    fetch('backend/get_courses.php')
+      .then(response => response.json())
+      .then(data => {
+        console.log("Data fetched:", data); // Add this line
+        courseList.innerHTML = '';
+        
+        if (data.length > 0) {
+          data.forEach(course => {
+            var examDate = new Date(course.exam_date).getTime();
+            var now = new Date().getTime();
+            var diff = examDate - now;
+            var daysLeft = Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+
+            var itemHtml = `
+              <div class="mini-item">
+                <span class="text-capitalize">${course.course_name}</span>
+                <span class="m-count mono">${daysLeft}d left</span>
+              </div>
+            `;
+            courseList.innerHTML += itemHtml;
+          });
+        } else {
+          courseList.innerHTML = '<div class="mini-item"><span style="color:var(--muted);">No courses found.</span></div>';
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching courses:', error);
+        courseList.innerHTML = '<div class="mini-item"><span style="color:var(--signal);">Connection error.</span></div>';
+      });
   }
 });

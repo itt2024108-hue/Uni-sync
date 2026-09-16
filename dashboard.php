@@ -16,25 +16,25 @@
 <!-- NAV -->
 <div class="nav-wrap">
   <div class="shell">
-    <a href="index.html" class="brand"><span class="pulse"></span> Uni-Sync</a>
+    <a href="index.php" class="brand"><span class="pulse"></span> Uni-Sync</a>
     <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="planner.html">Study planner</a>
-      <a href="dashboard.html" class="current">Dashboard</a>
-      <a href="input.html">Add Course</a>
+      <a href="index.php">Home</a>
+      <a href="planner.php">Study planner</a>
+      <a href="dashboard.php" class="current">Dashboard</a>
+      <a href="input.php">Add Course</a>
     </div>
     <div class="nav-cta">
-      <a href="planner.html" class="btn-ghost btn d-none d-sm-inline-flex">Study planner</a>
-      <a href="index.html" class="btn-signal btn">Get started</a>
+      <a href="planner.php" class="btn-ghost btn d-none d-sm-inline-flex">Study planner</a>
+      <a href="index.php" class="btn-signal btn">Get started</a>
       <button class="nav-toggle" id="navToggle"><i class="bi bi-list"></i></button>
     </div>
   </div>
 </div>
 
 <div id="mobileMenu" class="shell d-none" style="padding-top:1rem; padding-bottom:1rem; border-bottom:1px solid var(--line-soft);">
-  <a href="index.html">Home</a>
-  <a href="planner.html">Study planner</a>
-  <a href="dashboard.html" class="current">Dashboard</a>
+  <a href="index.php">Home</a>
+  <a href="planner.php">Study planner</a>
+  <a href="dashboard.php" class="current">Dashboard</a>
 </div>
 
 <!-- PAGE HEAD -->
@@ -54,8 +54,12 @@
         <span class="dot" style="background:#3a4457;"></span>
         <span class="dot" style="background:#3a4457;"></span>
         <span class="dot" style="background:#3a4457;"></span>
-            <div class="mini-item"><span>DB Assignment 3</span><span class="m-count mono">03d</span></div>
-            <div class="mini-item"><span>Networks Lab</span><span class="m-count mono">01d</span></div>
+            <div class="card-mini">
+            <h5>Upcoming</h5>
+            <div id="dynamicCourseList">
+              <div class="mini-item" style="color:var(--muted);">Loading database...</div>
+            </div>
+          </div>
           </div>
           <div class="card-mini">
             <h5>Syllabus coverage</h5>
@@ -113,7 +117,7 @@
     <div class="cta-block">
       <h2>Ready to see the recalibration engine?</h2>
       <p>Simulate a missed session and watch the plan rebuild itself.</p>
-      <a href="planner.html" class="btn-signal btn">Try the study planner</a>
+      <a href="planner.php" class="btn-signal btn">Try the study planner</a>
     </div>
   </div>
 </section>

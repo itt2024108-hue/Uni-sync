@@ -16,25 +16,25 @@
 <!-- NAV -->
 <div class="nav-wrap">
   <div class="shell">
-    <a href="index.html" class="brand"><span class="pulse"></span> Uni-Sync</a>
+    <a href="index.php" class="brand"><span class="pulse"></span> Uni-Sync</a>
     <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="planner.html" class="current">Study planner</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="input.html">Add Course</a>
+      <a href="index.php">Home</a>
+      <a href="planner.php" class="current">Study planner</a>
+      <a href="dashboard.php">Dashboard</a>
+      <a href="input.php">Add Course</a>
     </div>
     <div class="nav-cta">
-      <a href="dashboard.html" class="btn-ghost btn d-none d-sm-inline-flex">See the dashboard</a>
-      <a href="index.html" class="btn-signal btn">Get started</a>
+      <a href="dashboard.php" class="btn-ghost btn d-none d-sm-inline-flex">See the dashboard</a>
+      <a href="index.php" class="btn-signal btn">Get started</a>
       <button class="nav-toggle" id="navToggle"><i class="bi bi-list"></i></button>
     </div>
   </div>
 </div>
 
 <div id="mobileMenu" class="shell d-none" style="padding-top:1rem; padding-bottom:1rem; border-bottom:1px solid var(--line-soft);">
-  <a href="index.html">Home</a>
-  <a href="planner.html" class="current">Study planner</a>
-  <a href="dashboard.html">Dashboard</a>
+  <a href="index.php">Home</a>
+  <a href="planner.php" class="current">Study planner</a>
+  <a href="dashboard.php">Dashboard</a>
 </div>
 
 <!-- PAGE HEAD -->
@@ -122,7 +122,7 @@
     <div class="cta-block">
       <h2>See how this looks on your dashboard</h2>
       <p>Countdowns, today's blocks, and coverage all in one screen.</p>
-      <a href="dashboard.html" class="btn-signal btn">Open the dashboard preview</a>
+      <a href="dashboard.php" class="btn-signal btn">Open the dashboard preview</a>
     </div>
   </div>
 </section>

@@ -16,24 +16,25 @@
 <!-- NAV -->
 <div class="nav-wrap">
   <div class="shell">
-    <a href="index.html" class="brand"><span class="pulse"></span> Uni-Sync</a>
+    <a href="index.php" class="brand"><span class="pulse"></span> Uni-Sync</a>
     <div class="nav-links">
-      <a href="index.html" class="current">Home</a>
-      <a href="planner.html">Study planner</a>
-      <a href="dashboard.html">Dashboard</a>
+      <a href="index.php" class="current">Home</a>
+      <a href="planner.php">Study planner</a>
+      <a href="dashboard.php">Dashboard</a>
+      <a href="input.php">Add Course</a>
     </div>
     <div class="nav-cta">
-      <a href="dashboard.html" class="btn-ghost btn d-none d-sm-inline-flex">See the dashboard</a>
-      <a href="planner.html" class="btn-signal btn">Get started</a>
+      <a href="dashboard.php" class="btn-ghost btn d-none d-sm-inline-flex">See the dashboard</a>
+      <a href="planner.php" class="btn-signal btn">Get started</a>
       <button class="nav-toggle" id="navToggle"><i class="bi bi-list"></i></button>
     </div>
   </div>
 </div>
 
 <div id="mobileMenu" class="shell d-none" style="padding-top:1rem; padding-bottom:1rem; border-bottom:1px solid var(--line-soft);">
-  <a href="index.html" class="current">Home</a>
-  <a href="planner.html">Study planner</a>
-  <a href="dashboard.html">Dashboard</a>
+  <a href="index.php" class="current">Home</a>
+  <a href="planner.php">Study planner</a>
+  <a href="dashboard.php">Dashboard</a>
 </div>
 
 <!-- HERO -->
@@ -45,8 +46,8 @@
         <h1>Your syllabus, turned into a plan that survives a bad week.</h1>
         <p class="lead mt-3 mb-4">Uni-Sync tracks every exam and deadline, breaks each syllabus into daily study blocks, and rebuilds the plan the moment you fall behind — no manual rescheduling, no guilt spiral.</p>
         <div class="d-flex gap-3">
-          <a href="planner.html" class="btn-signal btn">Get started</a>
-          <a href="dashboard.html" class="btn-ghost btn">See the dashboard</a>
+          <a href="planner.php" class="btn-signal btn">Get started</a>
+          <a href="dashboard.php" class="btn-ghost btn">See the dashboard</a>
         </div>
       </div>
       <div class="col-lg-6">
@@ -56,7 +57,7 @@
             <span class="dots"><span></span><span></span><span></span></span>
           </div>
           <div class="console-label">Next up</div>
-          <div class="console-course">Data Structures &amp; Algorithms — Final Exam</div>
+          <div class="console-course">First year second semester Final Exam</div>
           <div class="countdown mono" id="heroCountdown">
             <div class="unit"><div class="num" id="hd">00</div><div class="lbl">days</div></div>
             <div class="unit"><div class="num" id="hh">00</div><div class="lbl">hours</div></div>
@@ -111,7 +112,7 @@
       <div class="col">
         <h3>Adaptive study planner</h3>
         <p>Each syllabus is split into daily study blocks sized to what's actually left before the exam. Miss a session, and a deterministic formula redraws the rest of the week for you.</p>
-        <a href="planner.html" class="btn-ghost btn mt-2">See the planner in action</a>
+        <a href="planner.php" class="btn-ghost btn mt-2">See the planner in action</a>
       </div>
       <div class="col">
         <div class="engine-panel">
@@ -131,7 +132,7 @@
       <div class="col">
         <h3>One dashboard for everything</h3>
         <p>Countdowns, today's study blocks, and syllabus coverage in a single screen — no switching between a calendar app, a to-do list, and a notebook.</p>
-        <a href="dashboard.html" class="btn-ghost btn mt-2">Open the dashboard preview</a>
+        <a href="dashboard.php" class="btn-ghost btn mt-2">Open the dashboard preview</a>
       </div>
       <div class="col">
         <div class="engine-panel" style="text-align:center;">
@@ -152,7 +153,7 @@
       <div class="kicker" style="justify-content:center;">Skill Development Project I — ICT 1108</div>
       <h2>Uni-Sync: an academic command center, built by students.</h2>
       <p>Developed by Group 06, Department of Information and Communication Technology, Faculty of Technology, Rajarata University of Sri Lanka.</p>
-      <a href="planner.html" class="btn-signal btn">Explore the planner</a>
+      <a href="planner.php" class="btn-signal btn">Explore the planner</a>
     </div>
   </div>
 </section>
