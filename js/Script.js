@@ -35,6 +35,7 @@ function initCountdowns() {
       sEl.textContent = String(s).padStart(2, '0');
     }
     tick();
+    setInterval(tick, 1000);
   }
 
   // Hero countdown (index.html): 12 days 4 hours from now
