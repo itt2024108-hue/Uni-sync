@@ -19,7 +19,7 @@ function initCountdowns() {
     var hEl = document.getElementById(ids.h);
     var mEl = document.getElementById(ids.m);
     var sEl = document.getElementById(ids.s);
-    if (!dEl  !hEl  !mEl || !sEl) return;
+    if (!dEl || !hEl || !mEl || !sEl) return;
 
     function tick() {
       var now = new Date().getTime();
@@ -52,7 +52,7 @@ function initEngineDemo() {
   var missBtn = document.getElementById('missBtn');
   var resetBtn = document.getElementById('resetBtn');
   var note = document.getElementById('engineNote');
-  if (!missBtn  !resetBtn  !note) return;
+  if (!missBtn || !resetBtn || !note) return;
 
   var bars = [
     { bar: 'b0', val: 'v0' },
