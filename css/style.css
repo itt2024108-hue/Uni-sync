@@ -246,7 +246,7 @@ h1,h2,h3{ font-weight:600; letter-spacing:-0.01em; }
 }
 .table-panel td{ padding:0.9rem 1.1rem; border-bottom:1px solid var(--line-soft); }
 .table-panel tr:last-child td{ border-bottom:none; }
-.status-pill{ font-size:0.74rem; padding:0.25rem 0.7rem; border-radius:20px; }
+.status-pill { font-size:0.75rem; padding:0.25rem 0.7rem; border-radius:20px; white-space: nowrap; }
 .status-pill.ontrack{ background:rgba(61,220,151,.12); color:var(--go); }
 .status-pill.soon{ background:rgba(255,90,60,.14); color:var(--signal); }
 .status-pill.later{ background:rgba(91,140,255,.14); color:var(--data); }
@@ -263,3 +263,181 @@ footer .meta{ line-height:1.9; }
 }
 .cta-block h2{ font-size:2rem; margin-bottom:0.8rem; }
 .cta-block p{ color:var(--muted); max-width:480px; margin:0 auto 1.8rem; }
+
+/* =========================================
+   PREMIUM LIGHT THEME (ULTIMATE FIX)
+   ========================================= */
+
+/* 1. Main Background & Grid */
+body.light-theme,
+body.light-theme section,
+body.light-theme .bg-dark,
+body.light-theme .grid-bg {
+    background-color: #F8FAFC !important;
+    background-image: linear-gradient(#E2E8F0 1px, transparent 1px), linear-gradient(90deg, #E2E8F0 1px, transparent 1px) !important;
+    color: #0F172A !important;
+}
+
+/* 2. Elevated White Panels */
+body.light-theme .console, 
+body.light-theme .card-mini, 
+body.light-theme .card-mini-wide,
+body.light-theme .engine-panel,
+body.light-theme .browser-frame,
+body.light-theme .strip,
+body.light-theme .cta-block,
+body.light-theme .step {
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05) !important;
+    border-radius: 12px !important;
+}
+
+/* 3. Fix Invisible Text in Cards & Steps */
+body.light-theme h1, body.light-theme h2, body.light-theme h3, 
+body.light-theme h4, body.light-theme h5 {
+    color: #0F172A !important;
+}
+
+/* Carefully target text inside panels without breaking buttons/progress bars */
+body.light-theme .console *:not(.btn):not(.badge):not(.go):not(.progress-bar):not(.num),
+body.light-theme .card-mini *:not(.btn):not(.badge):not(.go):not(.progress-bar):not(.progress-ring):not(.progress-ring-inner),
+body.light-theme .card-mini-wide *:not(.btn):not(.badge):not(.go):not(.progress-bar),
+body.light-theme .engine-panel *:not(.btn):not(.badge):not(.go):not(.progress-bar),
+body.light-theme .browser-frame *:not(.btn):not(.badge):not(.go):not(.progress-bar),
+body.light-theme .step *:not(.btn):not(.badge):not(.go) {
+    color: #0F172A !important;
+}
+
+body.light-theme p, 
+body.light-theme .kicker,
+body.light-theme .console-label,
+body.light-theme [style*="color:var(--muted)"] {
+    color: #64748B !important;
+}
+
+/* 4. Fix Tags, Inputs, and Progress Tracks */
+body.light-theme .form-control,
+body.light-theme select,
+body.light-theme .tag-list span,
+body.light-theme .course-tag {
+    background-color: #F1F5F9 !important;
+    border: 1px solid #CBD5E1 !important;
+    color: #0F172A !important;
+}
+
+body.light-theme .progress {
+    background-color: #E2E8F0 !important; 
+}
+
+body.light-theme .btn-ghost {
+    color: #0F172A !important;
+    border: 1px solid #CBD5E1 !important;
+}
+body.light-theme .btn-ghost:hover {
+    background-color: #F1F5F9 !important;
+}
+
+/* 5. Light Blue Accents (#0ea5e9) */
+body.light-theme .btn-signal,
+body.light-theme .badge.bg-signal,
+body.light-theme .pulse,
+body.light-theme .progress-bar.bg-signal {
+    background-color: #0ea5e9 !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+body.light-theme span[style*="color:var(--signal)"],
+body.light-theme strong[style*="color:var(--signal)"],
+body.light-theme .go,
+body.light-theme .num {
+    color: #0ea5e9 !important;
+    font-weight: 600 !important;
+}
+
+/* 6. Dashboard Progress Ring Fix (Eliminates the Black Circle) */
+body.light-theme .progress-ring {
+    background: conic-gradient(#0ea5e9 var(--progress, 0%), #E2E8F0 0) !important;
+}
+body.light-theme .progress-ring-inner {
+    background-color: #FFFFFF !important;
+}
+/* --- MISSING NAVBAR & DASHBOARD PANEL FIX --- */
+
+/* 1. Fix the Navigation Bar */
+body.light-theme .nav-wrap {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+}
+body.light-theme .nav-links a { color: #64748B !important; }
+body.light-theme .nav-links a.current { 
+    color: #0ea5e9 !important; 
+    font-weight: 600 !important; 
+}
+
+/* 2. Fix the "Today's Plan" Box and any remaining black panels */
+body.light-theme .bg-black,
+body.light-theme .bg-dark,
+body.light-theme .panel,
+body.light-theme .dashboard-panel {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05) !important;
+    border-radius: 12px !important;
+}
+
+/* Force text inside those panels to be dark */
+body.light-theme .bg-black *:not(.btn):not(.badge):not(.go):not(.progress-bar):not(.progress-ring):not(.progress-ring-inner),
+body.light-theme .panel *:not(.btn):not(.badge):not(.go):not(.progress-bar):not(.progress-ring):not(.progress-ring-inner),
+body.light-theme .dashboard-panel *:not(.btn):not(.badge):not(.go):not(.progress-bar):not(.progress-ring):not(.progress-ring-inner) {
+    color: #0F172A !important;
+}
+/* Fix the dashboard progress circle */
+body.light-theme .ring-inner {
+    background-color: #FFFFFF !important;
+}
+
+/* =========================================
+   REMAINING WEEK DAY BOXES & SKIP (REAL FIX)
+   ========================================= */
+
+/* 1. Put the border around the day column (Mon, Tue, etc.) */
+body.light-theme .bars .bar-col {
+    border: 1px solid #CBD5E1 !important;
+    border-radius: 8px !important;
+    padding: 10px 5px !important;
+    background-color: #FFFFFF !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Day column hover effect */
+body.light-theme .bars .bar-col:hover {
+    border-color: #0ea5e9 !important;
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15) !important;
+}
+
+/* 2. Put the clickable border on the Skip button inside */
+body.light-theme .bars .bar-col button,
+body.light-theme .bars .bar-col .skip,
+body.light-theme .bars .bar-col .skip-btn {
+    border: 1px solid #94A3B8 !important;
+    background-color: transparent !important;
+    color: #0F172A !important;
+    border-radius: 6px !important;
+    padding: 2px 10px !important;
+    margin-top: 8px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Skip button hover effect */
+body.light-theme .bars .bar-col button:hover,
+body.light-theme .bars .bar-col .skip:hover,
+body.light-theme .bars .bar-col .skip-btn:hover {
+    border-color: #0ea5e9 !important;
+    color: #0ea5e9 !important;
+    background-color: #F8FAFC !important;
+}
