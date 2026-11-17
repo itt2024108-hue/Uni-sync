@@ -170,18 +170,24 @@
       </div>
     </div>
 
-    <div class="feature-row">
-      <div class="col" style="padding-left: 100px;">
-        <h3>One dashboard for everything</h3>
-        <p>Countdowns, today's study blocks, and syllabus coverage in a single screen no switching between a calendar app, a to do list, and a notebook.</p>
-        <a href="dashboard.php" class="btn-ghost btn mt-2">Open the dashboard preview</a>
-      </div>
-
-         
-      </div>
+<section style="min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 40px;">
+    <div style="text-align: center; max-width: 900px; margin: 0 auto;">
+        <h1 style="font-size: 3.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 25px; letter-spacing: -1px;">
+            One dashboard for everything
+        </h1>
+        
+        <p style="font-size: 1.4rem; line-height: 1.6; margin-bottom: 40px; opacity: 0.85; max-width: 750px; margin-left: auto; margin-right: auto;">
+            Countdowns, today's study blocks, and syllabus coverage in a single screen. No switching between a calendar app, a to-do list, and a notebook.
+        </p>
+        
+        <a href="dashboard.php" class="btn-ghost btn" style="font-size: 1.2rem; padding: 15px 45px; border-radius: 30px; font-weight: 600;">
+            Open the dashboard preview
+        </a>
     </div>
-  </div>
 </section>
+        
+       
+
 
 <!-- CTA -->
 <section>

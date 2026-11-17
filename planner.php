@@ -125,15 +125,21 @@ $user_id = $_SESSION['user_id'];
     <div class="console" style="padding:1.5rem;">
       <h3 style="margin-bottom: 1rem; font-size:1.4rem;">Set Course Workload</h3>
       <p style="color:var(--muted); font-size:0.9rem; margin-bottom:1.5rem;">
-      <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+<div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 8px;">
     <p style="color: var(--text-main); font-size: 0.9rem; margin-top: 0; margin-bottom: 10px;"><strong>💡 How to calculate your units:</strong></p>
-    <ul style="color: var(--muted); font-size: 0.85rem; padding-left: 20px; margin-bottom: 10px; line-height: 1.6;">
+    <ul style="color: var(--muted); font-size: 0.85rem; padding-left: 20px; margin-bottom: 15px; line-height: 1.6;">
         <li><strong>Theory Exams:</strong> 1 Unit = 1 Lecture Topic or 1 Textbook Page.</li>
         <li><strong>Math/Coding Exams:</strong> 1 Unit = 1 Practice Question or 1 Algorithm.</li>
     </ul>
+    
+    <!-- NEW DEADLINE TIP -->
+    <div style="background: rgba(255, 165, 0, 0.1); border-left: 3px solid var(--signal); padding: 10px; margin-bottom: 15px; border-radius: 4px;">
+        <span style="color: var(--signal); font-weight: bold; font-size: 0.85rem;">⚠️ Deadline Strategy:</span><br>
+        <span style="color: var(--text-main); font-size: 0.85rem;">Do not select your exact exam date. Set your deadline to the <strong>day before the exam</strong> so your workload finishes early!</span>
+    </div>
+
     <p style="color: var(--muted); font-size: 0.8rem; margin-bottom: 0;"><em>Count the total units in your syllabus and enter them below to generate your daily plan.</em></p>
 </div>
-      </p>
       
       <form id="workloadForm" class="row g-3 align-items-end">
         <div class="col-md-5">
@@ -164,7 +170,7 @@ $user_id = $_SESSION['user_id'];
       <div class="col-lg-5">
         <div class="kicker">Try it</div>
         <h2 style="font-size:1.9rem;">Simulate a missed study session.</h2>
-        <p style="color:var(--muted); max-width:420px;">This is the exact formula from the Uni-Sync methodology. Monday's block is already done — see what happens to the rest of the week if Tuesday gets skipped.</p>
+        <p style="color:var(--muted); max-width:420px;">This is the exact formula from the Uni-Sync methodology. Monday's block is already done see what happens to the rest of the week if Tuesday gets skipped.</p>
      
 
         <button id="resetBtn" class="btn-ghost btn" style="display:none;">Reset week</button>
@@ -192,7 +198,7 @@ $user_id = $_SESSION['user_id'];
       <div class="step">
         <div class="step-no">Step 2</div>
         <h4>Detect a miss</h4>
-        <p>If a planned block is skipped, its workload isn't deleted — it's marked as still owed to the plan.</p>
+        <p>If a planned block is skipped, its workload isn't deleted it's marked as still owed to the plan.</p>
       </div>
       <div class="step">
         <div class="step-no">Step 3</div>

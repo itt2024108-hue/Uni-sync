@@ -239,6 +239,9 @@ $overall_percentage = ($grand_total > 0) ? round(($grand_completed / $grand_tota
                       <button type="submit" class="btn-signal btn"><i class="bi bi-check2-square"></i> Log</button>
                   </form>
               </div>
+          <button type="button" onclick="deleteSelectedCourse()" class="btn btn-warning">
+    Delete Course
+</button>
               
           </div>
       </div>
@@ -327,6 +330,54 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }, 300); // 300ms delay ensures it fires last
 });
+
+function deleteSelectedCourse() {
+    // 1. Grab the dropdown
+    const dropdown = document.getElementById("progcourse"); 
+    
+    if (!dropdown) {
+        alert("Could not find the dropdown menu. Check the ID.");
+        return;
+    }
+    
+    // 2. Get the selected course code
+    const courseCode = dropdown.value;
+
+    if (!courseCode) {
+        alert("Please select a course from the dropdown first!");
+        return;
+    }
+
+    // 3. Ask for confirmation
+    if (confirm("Are you sure you want to delete this course (" + courseCode + ")?")) {
+        const formData = new FormData();
+        formData.append('course_code', courseCode); 
+
+        // 4. Send the delete request to the backend
+        fetch('backend/delete_course.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.text()) 
+        .then(text => {
+            try {
+                const data = JSON.parse(text);
+                if (data.status === 'success') {
+                    // 5. Wipe the browser memory and reload!
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    location.reload(); 
+                } else {
+                    alert("Error: " + data.message);
+                }
+            } catch(err) {
+                alert("Server error details:\n\n" + text);
+                console.error("Raw server response:", text);
+            }
+        })
+        .catch(err => alert("Network error: Could not reach the server."));
+    }
+}
 </script>
 </body>
 </html>

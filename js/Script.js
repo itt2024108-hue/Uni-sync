@@ -36,7 +36,14 @@ document.addEventListener('DOMContentLoaded', function () {
   if (titleEl) titleEl.innerText = "Connecting to database...";
   if (promoTitleEl) promoTitleEl.innerText = "Connecting...";
 
-  fetch('backend/get_courses.php', { cache: 'no-store' })
+  // Added cache-busting headers to prevent ghost data
+  fetch('backend/get_courses.php', { 
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache'
+      }
+  })
     .then(response => response.text()) 
     .then(text => {
       try {
@@ -148,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if(promoTitleEl) promoTitleEl.innerText = "Connection failed";
     });
 });
+
 // ---------- 2. Dynamic Dashboard Course List ----------
 document.addEventListener('DOMContentLoaded', function () {
   const courseList = document.getElementById('dynamicCourseList');
@@ -318,7 +326,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (engineNote) engineNote.innerHTML = "All deadlines have passed!";
                 return;
             }
-// 1. Create a text breakdown of units for EVERY course (Vertical List)
+
+            // 1. Create a text breakdown of units for EVERY course (Vertical List)
             let courseBreakdown = futureCourses.map(c => {
                 let wl = parseInt(c.workload) || 0;
                 let comp = parseInt(c.completed_workload) || 0;
@@ -333,11 +342,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 return sum + Math.max(wl - comp, 0);
             }, 0);
 
-            // 3. Find days left based on the closest urgent deadline
-            let closestDate = futureCourses[0].exam_date;
-            let targetTime = new Date(closestDate).getTime();
-            let totalDaysLeft = Math.ceil((targetTime - nowTime) / (1000 * 60 * 60 * 24));
-            if (totalDaysLeft < 1) totalDaysLeft = 1;
+            // 3. Force planner to ALWAYS spread workload across 7 days
+            let totalDaysLeft = 7; 
 
             let missedDays = new Set();
             const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -361,7 +367,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 let barsHTML = '';
                 dayNames.forEach((day, index) => {
                     let isMissed = missedDays.has(index);
-                    if (isMissed) {
+                    let isPastDeadline = index >= totalDaysLeft; // Hides extra days if totalDaysLeft is ever reduced
+
+                    if (isPastDeadline) {
+                        barsHTML += `
+                           <div class="bar-col" style="flex: 1; background: transparent; padding: 10px 6px; border-radius: 8px; text-align: center; opacity: 0.3;" data-day="${index}">
+                               <div style="height: 20px; margin-bottom: 6px;"></div>
+                               <div class="bar-day" style="font-size: 0.75rem; color: var(--muted); margin-bottom: 4px;">${day}<br><span>-</span></div>
+                           </div>
+                        `;
+                    } else if (isMissed) {
                         barsHTML += `
                            <div class="bar-col missed-col" style="flex: 1; background: var(--card-bg); padding: 10px 6px; border-radius: 8px; text-align: center; border: 1px dashed var(--signal);" data-day="${index}">
                                <div class="bar" style="height: 20px; background: rgba(255,255,255,0.05); border-radius: 4px; margin-bottom: 6px;"></div>
@@ -401,12 +416,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 // Update text description with full multi-course breakdown
-               
                 if (engineNote) {
                     if (missedDays.size === 0) {
                         engineNote.innerHTML = `
                             <div style="margin-bottom: 12px; font-size: 0.95rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">${courseBreakdown}</div>
-                            <div><strong>${totalRemainingWorkload} combined units</strong> remain across <strong>${totalDaysLeft} days</strong> (closest exam).</div>
+                            <div><strong>${totalRemainingWorkload} combined units</strong> remain across a <strong>7-day weekly schedule</strong>.</div>
                             <div style="margin-top: 6px;">Requires <strong style="color:var(--signal);">${dailyLoad} units/day</strong> total.</div>
                         `;
                     } else {
@@ -516,6 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
 // ============================================================================
 // DASHBOARD DYNAMIC POPULATION (Dropdown, Table & Live Countdown)
 // ============================================================================
@@ -601,6 +616,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(err => console.error("Dashboard error:", err));
 });
+
 // ============================================================================
 // HOME PAGE DYNAMIC CALENDAR (Highlights Deadlines)
 // ============================================================================
@@ -667,3 +683,53 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(err => console.error("Error loading calendar data:", err));
 });
+
+// ============================================================================
+// FIX: DYNAMIC DELETE FUNCTION (Targets the Dropdown & Clears Memory)
+// ============================================================================
+function deleteSelectedCourse() {
+    // Look for the exact ID of your dropdown menu
+    const dropdown = document.getElementById("progcourse") || document.getElementById("courseSelect"); 
+    
+    if (!dropdown) {
+        alert("Error: Could not find the dropdown menu.");
+        return;
+    }
+    
+    const courseCode = dropdown.value;
+
+    if (!courseCode) {
+        alert("Please select a course from the dropdown first!");
+        return;
+    }
+
+    if (confirm("Are you sure you want to delete this course (" + courseCode + ")? All associated study blocks will also be removed.")) {
+        const formData = new FormData();
+        formData.append('course_code', courseCode); 
+
+        fetch('backend/delete_course.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.text()) 
+        .then(text => {
+            try {
+                const data = JSON.parse(text);
+                if (data.status === 'success') {
+                    // 1. CLEAR THE GHOST DATA
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    
+                    // 2. FORCE A HARD REFRESH OF THE PAGE 
+                    window.location.href = window.location.href; 
+                } else {
+                    alert("Database Error: " + data.message);
+                }
+            } catch(err) {
+                alert("Server error details:\n\n" + text);
+                console.error("Raw server response:", text);
+            }
+        })
+        .catch(err => alert("Network error: Could not reach the server."));
+    }
+}
